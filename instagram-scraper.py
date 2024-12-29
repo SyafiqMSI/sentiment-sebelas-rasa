@@ -255,13 +255,20 @@ def get_comments(driver, max_comments=800):
                 
                 is_reply = False
                 reply_to = None
-                try:
-                    reply_element = comment.find_element(By.CSS_SELECTOR, "._a9zj")
-                    if reply_element:
-                        is_reply = True
-                        reply_to = reply_element.text.replace("Reply to ", "")
-                except:
-                    pass
+
+                if text.startswith("@"):
+                    # Extract username
+                    is_reply = True
+                    reply_to = text.split(" ")[0][1:]
+                else:
+                    print("The text does not start with '@'.")
+                # try:
+                #     reply_element = comment.find_element(By.CSS_SELECTOR, "._a9zj")
+                #     if reply_element:
+                #         is_reply = True
+                #         reply_to = reply_element.text.replace("Reply to ", "")
+                # except:
+                #     pass
                 
                 comment_likes = 0
                 try:
