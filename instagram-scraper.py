@@ -344,7 +344,8 @@ def scrape_tagged_posts(driver):
     processed_positions = set()
     consecutive_empty_scrolls = 0
     max_empty_scrolls = 5
-    target_url = 'https://www.instagram.com/kulasyafiq/tagged/'
+    # target_url = 'https://www.instagram.com/kulasyafiq/tagged/'
+    target_url = 'https://www.instagram.com/sebelasrasa/tagged/'
     
     def get_visible_posts():
         return driver.find_elements(By.CSS_SELECTOR, "div._aagw")
