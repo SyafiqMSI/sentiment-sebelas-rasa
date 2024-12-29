@@ -165,8 +165,6 @@ def get_comments(driver, max_comments=800):
                 load_more_present = False
                 load_more_buttons = driver.find_elements(
                     By.XPATH,
-                    # "//button[contains(@class, '_abl-')]//svg[@aria-label='Load more comments' and contains(@class, 'x1lliihq')]"
-                    # "//*[local-name()='svg' and contains(@aria-label, 'Load more comment')]"
                     "//*[local-name()='svg' and contains(@aria-label, 'Load more comment')]//..//.."
                 )
                 
@@ -181,10 +179,6 @@ def get_comments(driver, max_comments=800):
                                 window.scrollBy(0, -200);
                             """, button)
                             time.sleep(scroll_delay)
-                            
-                            # svg = button.find_element(By.XPATH, ".//svg")
-                            # if svg.get_attribute("aria-label") != "Load more comments":
-                            #     continue
                                 
                             try:
                                 driver.execute_script("arguments[0].click();", button)
@@ -260,15 +254,9 @@ def get_comments(driver, max_comments=800):
                     # Extract username
                     is_reply = True
                     reply_to = text.split(" ")[0][1:]
+                    logging.info("The message is replying to @" + reply_to)
                 else:
-                    print("The text does not start with '@'.")
-                # try:
-                #     reply_element = comment.find_element(By.CSS_SELECTOR, "._a9zj")
-                #     if reply_element:
-                #         is_reply = True
-                #         reply_to = reply_element.text.replace("Reply to ", "")
-                # except:
-                #     pass
+                    logging.info("The text does not start with '@'.")
                 
                 comment_likes = 0
                 try:
