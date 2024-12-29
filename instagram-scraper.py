@@ -165,7 +165,9 @@ def get_comments(driver, max_comments=800):
                 load_more_present = False
                 load_more_buttons = driver.find_elements(
                     By.XPATH,
-                    "//button[.//svg[@aria-label='Load more comments'][contains(@class, 'x1lliihq')]]"
+                    # "//button[contains(@class, '_abl-')]//svg[@aria-label='Load more comments' and contains(@class, 'x1lliihq')]"
+                    # "//*[local-name()='svg' and contains(@aria-label, 'Load more comment')]"
+                    "//*[local-name()='svg' and contains(@aria-label, 'Load more comment')]//..//.."
                 )
                 
                 if load_more_buttons:
@@ -180,9 +182,9 @@ def get_comments(driver, max_comments=800):
                             """, button)
                             time.sleep(scroll_delay)
                             
-                            svg = button.find_element(By.XPATH, ".//svg")
-                            if svg.get_attribute("aria-label") != "Load more comments":
-                                continue
+                            # svg = button.find_element(By.XPATH, ".//svg")
+                            # if svg.get_attribute("aria-label") != "Load more comments":
+                            #     continue
                                 
                             try:
                                 driver.execute_script("arguments[0].click();", button)
@@ -523,6 +525,7 @@ def main():
             raise Exception("No posts found")
             
         posts_data = scrape_tagged_posts(driver)
+        # posts_data = get_post_data('https://www.instagram.com/jonyrahardja/reel/DDrYIDHv27g/', driver)
         
         if posts_data:
             save_results(posts_data)
