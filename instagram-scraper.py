@@ -522,6 +522,7 @@ def main():
             
         posts_data = scrape_tagged_posts(driver)
         # posts_data = get_post_data('https://www.instagram.com/jonyrahardja/reel/DDrYIDHv27g/', driver)
+        # posts_data = get_post_data('https://www.instagram.com/p/Ct-iygQB3eO/', driver)
         
         if posts_data:
             save_results(posts_data)
