@@ -520,9 +520,9 @@ def main():
         if not first_post:
             raise Exception("No posts found")
             
-        posts_data = scrape_tagged_posts(driver)
+        # posts_data = scrape_tagged_posts(driver)
         # posts_data = get_post_data('https://www.instagram.com/jonyrahardja/reel/DDrYIDHv27g/', driver)
-        # posts_data = get_post_data('https://www.instagram.com/p/Ct-iygQB3eO/', driver)
+        posts_data = get_post_data('https://www.instagram.com/kulinersolojogja.id/reel/Ct-iygQB3eO', driver)
         
         if posts_data:
             save_results(posts_data)
