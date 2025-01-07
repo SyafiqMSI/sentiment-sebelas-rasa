@@ -93,10 +93,9 @@ def display_instagram_content(post_link, likes_count, comments_count):
 
 def main():
     st.sidebar.title("Sidebar Options")
-    st.sidebar.header("Pie Chart Filters")
 
-    post_data_df_path = 'data/post_data_1_df.csv'
-    sentiment_df_path = 'data/sentiment_2_df.csv'
+    post_data_df_path = 'streamlit/data/post_data_1_df.csv'
+    sentiment_df_path = 'streamlit/data/sentiment_2_df.csv'
 
     post_data_df = load_data(post_data_df_path)
     sentiment_df = load_data(sentiment_df_path)
