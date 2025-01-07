@@ -60,37 +60,64 @@ def display_instagram_content(post_link, likes_count, comments_count):
                     frameborder="0" 
                     scrolling="no" 
                     allowtransparency="true"
-                    style="border-radius: 3px; border: 1px solid #dbdbdb;">
+                    style="border-radius: 3px; border: 1px solid var(--st-color-border-light);">
                 </iframe>
-                <div style="display: flex; justify-content: center; gap: 2rem; padding: 0.75rem;border-radius: 0 0 8px 8px; margin-top: -5px; font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
-                    <div style="text-align: center;">
-                        <span style="font-size: 1em;">👍 {likes_count:,}</span>
-                        <br/>
-                        <span style="font-size: 0.9em;">Likes</span>
-                    </div>
-                    <div style="text-align: center;">
-                        <span style="font-size: 1em;">💬 {comments_count:,}</span>
-                        <br/>
-                        <span style="font-size: 0.9em;">Comments</span>
-                    </div>
-                </div>
             </div>
             """
-            st.components.v1.html(embed_html, height=550)
+            st.components.v1.html(embed_html, height=450)
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown(
+                    f"""
+                    <div style="text-align: center;">
+                        <p style="font-size: 1.2em; margin-bottom: 0;">👍 {likes_count:,}</p>
+                        <p style="color: var(--st-color-secondary); margin-top: 0;">Likes</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            
+            with col2:
+                st.markdown(
+                    f"""
+                    <div style="text-align: center;">
+                        <p style="font-size: 1.2em; margin-bottom: 0;">💬 {comments_count:,}</p>
+                        <p style="color: var(--st-color-secondary); margin-top: 0;">Comments</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
             
     except Exception as e:
         st.warning("Unable to load Instagram content directly.")
-        st.markdown(f"""
-            <div style='padding: 20px; border-radius: 5px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, sans-serif;'>
-                <p>🔗 <a href="{post_link}" target="_blank">View {content_type.title()} on Instagram</a></p>
-                <p style='color: #666; font-size: 0.8em;'>Click the link above to view the {content_type} on Instagram</p>
-                <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem;">
-                    <div>👍 {likes_count:,} likes</div>
-                    <div>💬 {comments_count:,} comments</div>
+        
+        st.markdown(f"🔗 [View {content_type.title()} on Instagram]({post_link})")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(
+                f"""
+                <div style="text-align: center;">
+                    <p style="font-size: 1.2em; margin-bottom: 0;">👍 {likes_count:,}</p>
+                    <p style="color: var(--st-color-secondary); margin-top: 0;">Likes</p>
                 </div>
-            </div>
-        """, unsafe_allow_html=True)
-
+                """,
+                unsafe_allow_html=True
+            )
+        
+        with col2:
+            st.markdown(
+                f"""
+                <div style="text-align: center;">
+                    <p style="font-size: 1.2em; margin-bottom: 0;">💬 {comments_count:,}</p>
+                    <p style="color: var(--st-color-secondary); margin-top: 0;">Comments</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+            
 def main():
     st.sidebar.title("Sidebar Options")
 
