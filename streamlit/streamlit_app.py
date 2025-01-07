@@ -66,12 +66,12 @@ def display_instagram_content(post_link, likes_count, comments_count):
                     <div style="text-align: center;">
                         <span style="font-size: 1em;">👍 {likes_count:,}</span>
                         <br/>
-                        <span style="color: #666; font-size: 0.9em;">Likes</span>
+                        <span style="font-size: 0.9em;">Likes</span>
                     </div>
                     <div style="text-align: center;">
                         <span style="font-size: 1em;">💬 {comments_count:,}</span>
                         <br/>
-                        <span style="color: #666; font-size: 0.9em;">Comments</span>
+                        <span style="font-size: 0.9em;">Comments</span>
                     </div>
                 </div>
             </div>
