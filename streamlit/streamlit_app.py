@@ -142,6 +142,13 @@ def main():
         ['All', 'non-reply'],
         index=0
     )
+    
+    sentiment_options = ['positive', 'neutral', 'negative']
+    selected_sentiments = st.sidebar.multiselect(
+        "Filter by sentiment:",
+        sentiment_options,
+        default=sentiment_options  
+    )
 
     if selected_username == "All Posts":
         displayed_filtered_post_data_df = post_data_df
@@ -153,6 +160,9 @@ def main():
     if selected_comment_type == 'non-reply':
         filtered_sentiment_df = filtered_sentiment_df[filtered_sentiment_df['Comment'].str[0] != '@']
 
+    if selected_sentiments:
+        filtered_sentiment_df = filtered_sentiment_df[filtered_sentiment_df['Sentiment'].isin(selected_sentiments)]
+    
     st.title("Sebelas Rasa Sentiment Analysis")
 
     col1, col2 = st.columns([3, 2])
@@ -188,14 +198,12 @@ def main():
             </div>
             """.format(total_posts, total_likes, total_comments), unsafe_allow_html=True)
     with col2:
-        labels = ['positive', 'neutral', 'negative']
-        total_pos = filtered_sentiment_df[filtered_sentiment_df['Sentiment'] == labels[0]].shape[0]
-        total_neu = filtered_sentiment_df[filtered_sentiment_df['Sentiment'] == labels[1]].shape[0]
-        total_neg = filtered_sentiment_df[filtered_sentiment_df['Sentiment'] == labels[2]].shape[0]
-
+        labels = selected_sentiments
+        values = [filtered_sentiment_df[filtered_sentiment_df['Sentiment'] == label].shape[0] for label in labels]
+        
         fig = px.pie(
             names=labels,
-            values=[total_pos, total_neu, total_neg],
+            values=values,
             title="Comment Sentiment Distribution",
             color_discrete_sequence=px.colors.qualitative.Set3
         )
